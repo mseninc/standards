@@ -8,9 +8,9 @@
 読みやすく、バグの少ない、メンテナンスのしやすいコードを目指しましょう。
 規約に従うことは、多くの問題を改善し、技術的負債を減らします。
 
-[MSDN .NET Framework 3.5 名前に関するガイドライン](https://msdn.microsoft.com/ja-jp/library/ms229002(v=vs.90).aspx) および [MSDN C#のコーディング規則](https://msdn.microsoft.com/ja-jp/library/ff926074.aspx) を参考にしています。
+[MSDN .NET Framework 3.5 名前に関するガイドライン](https://msdn.microsoft.com/ja-jp/library/ms229002(v=vs.90).aspx) および [MSDN C# のコーディング規則](https://msdn.microsoft.com/ja-jp/library/ff926074.aspx)、 [C# CODING GUIDELINES](https://qiita.com/Ted-HM/items/67eddbe36b88bf2d441d) を参考にしています。
 
-MSDN のガイドラインはライブラリの Public な範囲を対象としているので、Private な範囲には必ずしも当てはまるわけではありません。
+MSDN のガイドラインはライブラリの Public な範囲を対象としているので、 Private な範囲には必ずしも当てはまるわけではありません。
 
 本書では、一部最新の C# の仕様やコーディング効率に合わせたルールを取り入れています。
 
@@ -25,3 +25,4 @@ MSDN のガイドラインはライブラリの Public な範囲を対象とし�
 - [命名規則](./naming-rules.md)
 - [コーディングスタイル](./coding-styles.md)
 - [イディオム](./idioms.md)
+- [付録](./appendix.md)
