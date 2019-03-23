@@ -1,0 +1,25 @@
+{
+  "name": "standards",
+  "version": "1.0.0",
+  "description": "MSEN Standards including coding standards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mseninc/standards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mseninc/standards/issues"
+  },
+  "homepage": "https://github.com/mseninc/standards#readme",
+  "devDependencies": {
+    "textlint": "^11.2.3",
+    "textlint-rule-preset-ja-spacing": "^2.0.1",
+    "textlint-rule-preset-ja-technical-writing": "^3.1.2",
+    "textlint-rule-prh": "^5.2.0"
+  }
+}
