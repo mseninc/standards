@@ -25,8 +25,6 @@ name = "Taro"
 - `array`
 - `function`
 
-参照型の変数を宣言する際には、 `const` 宣言子を用いる。
-
 例.
 ```JavaScript
 const arr = [ 'M', 'S', 'E', 'N' ]
