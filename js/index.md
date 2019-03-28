@@ -1,9 +1,8 @@
 # MSEN JavaScript Coding Standard
-JavaScriptのコーディング規約を定めます。
+JavaScript のコーディング規約を定めます。
 本規約は[Airbnb](https://mitsuruog.github.io/javascript-style-guide/#arrow-functions)のスタイルガイドを参考にしています。
 
-## 変数の操作
-### 型
+## 型
 1. 基本型
 以下の型の変数は直接値を操作する。
 - `string`
@@ -13,7 +12,6 @@ JavaScriptのコーディング規約を定めます。
 - `undefined`
 - `symbol`
 
-例.
 ```JavaScript
 let name = "Tari"
 name = "Taro"
@@ -25,7 +23,6 @@ name = "Taro"
 - `array`
 - `function`
 
-例.
 ```JavaScript
 const arr = [ 'M', 'S', 'E', 'N' ]
 arr[2] = 'O'
@@ -36,6 +33,109 @@ bob.age = 35
 
 ---
 
-### 参照
+## 参照
 参照型の変数を宣言する際には、 `const` 宣言子を使用する。
 参照を再割当てする変数を宣言する際には、 `let` 宣言子を使用する。
+
+```JavaScript
+const hoge = 1
+let   piyo = 2
+piyo += 10
+```
+
+---
+
+## オブジェクト
+1. オブジェクトを生成する際には、リテラル構文を使用する。
+
+```JavaScript
+const obj = {}
+```
+
+2. 動的なプロパティ名を持つオブジェクトを生成する際には、 [計算されたプロパティ名](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Object_initializer#%E8%A8%88%E7%AE%97%E3%81%95%E3%82%8C%E3%81%9F%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E5%90%8D)を使用する。
+
+```JavaScript
+function getKey(id)
+{
+    return `key-${id}`
+}
+
+const city = {
+    zipCode: '553-0001',
+    name: 'Ebie Fukushima Ward Osaka City',
+    [getKey('MSEN')]: 'MSEN Inc.'
+}
+```
+
+3. メソッドの定義には、メソッドの短縮構文を使用する。
+
+```JavaScript
+const cat = {
+    name: 'Oliver',
+
+    say() {
+        return 'Mew, I am Oliver.'
+    },
+}
+```
+
+4. オブジェクトのプロパティを宣言する際には、プロパティの短縮構文を使用する。
+
+```JavaScript
+const cpu = 'Intel Core i7 7600U'
+const os = 'FreeBSD 12.0-RELEASE'
+
+const machine = {
+    cpu,
+    os,
+}
+```
+
+5. プロパティの短縮構文は、オブジェクトの宣言の先頭にまとめる
+
+```JavaScript
+const cpu = 'Intel Core i7 7600U'
+const os = 'FreeBSD 12.0-RELEASE'
+
+const machine = {
+    cpu,
+    os,
+    memory: 128,
+    user: 'Oliver',
+}
+```
+
+6. プロパティが識別子の命名規則 (`/^[_a-zA-Z$](\w|\$)*$/`) に則っていない場合にのみ、プロパティを引用符で括る。
+```JavaScript
+const bob = {
+    name: 'Bob Crocker'
+    age: 35,
+    '553-0001': 'Ebie, Fukushima Ward, Osaka City',
+}
+```
+
+7. 以下のような `object.prototype` のメソッドを直接呼び出さない。
+  - `hasOwnProperty`
+  - `propertyIsEnumerable`
+  - `isPrototypeOf`
+
+```JavaScript
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key))
+
+// one of the best way
+const has = Object.prototype.hasOwnProperty
+// another way
+import has from 'has'  // https://www.npmjs.com/package/has
+
+console.log(has.call(object, key))
+```
+
+8. オブジェクトの浅いコピー (shallow-copy) をする際には、[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax) を使用する。特定のプロパティを省略したオブジェクトを新しく取得する場合は、オブジェクトのレスト演算子を使用する。
+
+```JavaScript
+const original = { a: 1, b: 2 }
+const copied   = { ...original, c: 3 }  // { a: 1, b: 2, c: 3 }
+
+const { a, ...noA } = copied  // noA => { b: 2, c: 3 }
+```
