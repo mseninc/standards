@@ -139,3 +139,81 @@ const copied   = { ...original, c: 3 }  // { a: 1, b: 2, c: 3 }
 
 const { a, ...noA } = copied  // noA => { b: 2, c: 3 }
 ```
+
+## 配列
+
+1. 配列を生成する際には、リテラル構文を使用する。
+
+```JavaScript
+const items = []
+```
+
+2. 配列の末尾に要素を追加する際には、直接配列に代入せず、 `push` メソッドを利用する。
+
+``` JavaScript
+const items = []
+items.push('hogehoge')
+```
+
+3. 配列をコピーする場合、配列の拡張演算子 `...` を利用する。
+
+```JavaScript
+const itemsCopy = [ ...items ]
+```
+
+4. イテレータブルなオブジェクトを配列に変換する際には、 `from` メソッドの代わりに `...` 演算子を利用する。
+
+```JavaScript
+let node
+const foo = document.querySelectorAll('.foo')
+
+// good
+node = Array.from(foo)
+
+// best
+node = [ ...foo ]
+```
+
+5. 配列ライクなオブジェクトを配列に変換する場合は、 `from`メソッドを利用する。
+
+```JavaScript
+const arrLike = { 0: 'hoge', 1: 'piyo', 2: 'foo', length: 3 }
+
+const arr = Array.from(arrLike)
+```
+
+6. イテレータブルなオブジェクトへのマッピングには、スプレッド構文の代わりに `from` メソッドを利用する。
+
+```JavaScript
+const baz = Array.from(foo, bar)
+```
+
+7. 配列のコールバック関数中では、 `return` 文を使用する。ただし、関数内の文が１つで、かつ副作用のない式を返す場合は  `return` を省略してよい。
+
+```JavaScript
+[1, 2, 3].map((x) => {
+    const y = x + 1
+    return x * y
+})
+
+[1, 2, 3].map(x => x + 1)
+```
+
+8. 配列の定義が複数行に渡る際は、配列の開き括弧の直後と閉じ括弧の直前で改行する。また、各要素ごとに改行を入れる。
+
+```JavaScript
+// 
+const numArr = [
+    1,
+    2
+]
+
+const objArr = [
+    {
+        id: 1,
+    },
+    {
+        id: 2,
+    },
+]
+```
