@@ -8,7 +8,12 @@
 読みやすく、バグの少ない、メンテナンスのしやすいコードを目指しましょう。
 規約に従うことは、多くの問題を改善し、技術的負債を減らします。
 
-[【PHP】PSR-1 Basic Coding Standard（基本コーディング標準）](https://www.ritolab.com/entry/91) 、 [【PHP】PSR-2 Coding Style Guide（コーディングスタイルガイド）](https://www.ritolab.com/entry/92) および [【PHP】PSR-4 Autoloader（オートローダー）](https://www.ritolab.com/entry/96) を参考にしています。
+下記の記事を参考にしています。
+- [【PHP】PSR-1 Basic Coding Standard（基本コーディング標準）](https://www.ritolab.com/entry/91)
+- [【PHP】PSR-2 Coding Style Guide（コーディングスタイルガイド）](https://www.ritolab.com/entry/92)
+- [【PHP】PSR-4 Autoloader（オートローダー）](https://www.ritolab.com/entry/96)
+- [PSR-1 基本コーディング規約（日本語）](http://www.infiniteloop.co.jp/docs/psr/psr-1-basic-coding-standard.html)
+- [PSR-2 コーディングガイド（日本語）](http://www.infiniteloop.co.jp/docs/psr/psr-2-coding-style-guide.html)
 
 本書は、フレームワーク独自のルールには触れていないため、使用するフレームワークによっては、本書のルールが必ずしも当てはまるわけではありません。
 
