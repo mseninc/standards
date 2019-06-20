@@ -56,8 +56,8 @@ function example()
 }
 
 // 条件付き宣言（＝副作用ではない）
-if (!function_exists('hoge')) {
-    function hoge()
+if (!function_exists('foo')) {
+    function foo()
     {
 
     }
@@ -295,8 +295,8 @@ namespace file_a_sample;
 // vendor/sample/file_b.php
 namespace file_b_sample;
 
-// vendor/hoge/file_a.php
-namespace file_a_hoge;
+// vendor/foo/file_a.php
+namespace file_a_foo;
 
 /**
  * 適切な例
@@ -307,8 +307,8 @@ namespace Vendor\Sample;
 // vendor/sample/file_b.php
 namespace Vendor\Sample;
 
-// vendor/hoge/file_a.php
-namespace Vendor\Hoge;
+// vendor/foo/file_a.php
+namespace Vendor\Foo;
 ```
 
 #### クラス名はStudlyCapsで宣言する
