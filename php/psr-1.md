@@ -311,7 +311,7 @@ namespace Vendor\Sample;
 namespace Vendor\Foo;
 ```
 
-#### クラス名はStudlyCapsで宣言する
+#### クラス名は StudlyCaps で宣言する
 
 クラス名は、 StudlyCaps 記法で定義しなければなりません。
 
