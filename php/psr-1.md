@@ -315,10 +315,6 @@ namespace Vendor\Foo;
 
 クラス名は、 StudlyCaps 記法で定義しなければなりません。
 
-ちなみに、語源が違うだけで以下は同じ記法を意味する。
-
-StudlyCaps ＝ UpperCamelCase ＝ PascalCase
-
 ### クラス定数、プロパティ及びメソッド
 
 クラス定数、プロパティ、およびメソッドについて。
