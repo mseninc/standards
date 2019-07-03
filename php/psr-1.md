@@ -311,9 +311,9 @@ namespace Vendor\Sample;
 namespace Vendor\Foo;
 ```
 
-#### クラス名は StudlyCaps で宣言する
+#### クラス名は Pascal Case で宣言する
 
-クラス名は、 StudlyCaps 記法で定義しなければなりません。
+クラス名は、 Pascal Case で定義しなければなりません。
 
 ### クラス定数、プロパティ及びメソッド
 
@@ -332,9 +332,9 @@ const DATE_APPROVED = '2018-03-18';
 
 プロパティ名は Camel Case で定義する。
 
->PSR-1 では、プロパティの命名規則として特定のスタイル（StudlyCaps, camelCase, under_score etc.）を推奨することはされていないが、適切なスコープ内において一貫性を持たせるべきです。  
+>PSR-1 では、プロパティの命名規則として特定のスタイル（Pascal Case, Camel Case, Snake Case etc.）を推奨することはされていないが、適切なスコープ内において一貫性を持たせるべきです。  
 ここでのスコープは、ベンダーレベル、パッケージレベル、クラスレベルまたはメソッドレベルを指します。
 
 #### メソッド
 
-メソッド名は camelCase 記法で定義しなければなりません。
+メソッド名は Camel Case で定義しなければなりません。
