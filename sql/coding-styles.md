@@ -26,7 +26,7 @@
 - キーワードやリテラルの間はスペースで区切ります。演算子の前後 (`=`, `>`, ...)、カンマ (`,`) の後、文字列リテラルの前後など、省略可能な場合でも省略してはいけません。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   COUNT(*) AS sushi_post_count
 FROM
@@ -36,7 +36,7 @@ WHERE
   AND posted_at > '2020-01-01'
 ;
 
--- 悪い例
+-- NG
 select
     count(*) as sushi_post_count
 from
@@ -99,7 +99,7 @@ ORDER BY
 逆にこれ以外の予約後については、一行が長くなりすぎたり CASE 文などでない限り、改行を省略します。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   DATE(created_at) AS created_date
 , COUNT(*) AS post_count
@@ -111,7 +111,7 @@ GROUP BY
   created_date
 ;
 
--- 悪い例
+-- NG
 SELECT DATE(created_at) AS created_date
 , COUNT(*)
   AS post_count
@@ -123,12 +123,22 @@ GROUP BY created_date
 ;
 ```
 
+ただし、 `SELECT DISTINCT` については続けて記載します。
+
+```sql
+SELECT DISTINCT
+  gender
+FROM
+  users
+;
+```
+
 #### 1 カラム 1 行にする
 
 SELECT、WHERE、WHERE で指定するカラムや条件式は、1 行に 1 つまでとし、1 行に複数を記述しないようにします。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   DATE(created_at) AS created_date
 , user_id
@@ -142,7 +152,7 @@ GROUP BY
 , user_id
 ;
 
--- 悪い例
+-- NG
 SELECT
   DATE(created_at) AS created_date, user_id, COUNT(*) AS post_count
 FROM
@@ -159,7 +169,7 @@ GROUP BY
 AND / OR は行の先頭におき、ブロックよりインデントを一段下げて記述します。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   COUNT(*) AS user_count
 FROM
@@ -170,7 +180,7 @@ WHERE
   AND admin IS NULL
 ;
 
--- 悪い例
+-- NG
 SELECT
   COUNT(*) AS user_count
 FROM
@@ -198,7 +208,7 @@ END
 ```
 
 ```sql
--- 良い例
+-- Good
 SELECT
   CASE
     WHEN DATE(created_at) = DATE(NOW())
@@ -212,7 +222,7 @@ FROM
   microposts
 ;
 
--- 悪い例
+-- NG
 SELECT
   CASE
   WHEN DATE(created_at) = DATE(NOW()) THEN 'today'
@@ -225,30 +235,51 @@ FROM
 ;
 ```
 
-#### JOIN 句は字下げして、ON は更に字下げする
-
-JOIN 句を字下げせず、ON だけ字下げするようにします。
-JOIN の書き方は様々な流派があるようです。
+単純 CASE の場合は CASE の直後に式を配置します。
 
 ```sql
--- 良い例
+SELECT
+  CASE post_type
+    WHEN 'article'
+      THEN '投稿'
+    WHEN 'news'
+      THEN 'ニュース'
+    ELSE 'その他'
+  END AS post_type_name
+FROM
+  posts
+;
+```
+
+#### JOIN 句は字下げして、ON は更に字下げする
+
+JOIN 句を字下げせず、ON とそれに続く条件式をインデントします。
+
+```sql
+-- Good
 SELECT
   COUNT(*) AS post_count
 FROM
   microposts AS m
   INNER JOIN users AS u
     ON m.user_id = u.id
+    AND u.created_at > '2020-01-01'
+  LEFT JOIN countries AS c
+    ON c.id = u.country_id
 WHERE
   u.status IN ('signup', 'available')
 ;
 
--- 悪い例
+-- NG
 SELECT
   COUNT(*) AS post_count
 FROM
   microposts AS m
 INNER JOIN users AS u
 ON m.user_id = u.id
+AND u.created_at > '2020-01-01'
+LEFT JOIN countries AS c
+ON c.id = u.country_id
 WHERE
   u.status IN ('signup', 'available')
 ;
@@ -256,11 +287,11 @@ WHERE
 
 #### セミコロンは最終行に置く
 
-複数の SQL を並べて書く場合に効力を発揮します。
-どこで　 SQL が終わっているかがわかりやすくなります。
+セミコロンを SQL 文の最終行の行頭に配置します。
+どこで SQL が終わっているかがわかりやすくなります。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   COUNT(*) AS sushi_beer_post_count
 FROM
@@ -270,7 +301,7 @@ WHERE
   AND content REGEXP(':(sushi|beer):')
 ;
 
--- 悪い例
+-- NG
 SELECT
   COUNT(*) AS sushi_beer_post_count
 FROM
@@ -291,7 +322,7 @@ WITH はカンマで区切って、複数のクエリを書くことができま
 WITH user_post_count AS (
   SELECT
     user_id
-,   COUNT(*) post_count
+  , COUNT(*) post_count
   FROM
     microposts
   GROUP BY
@@ -314,7 +345,7 @@ GROUP BY
 ただし、できるだけ WITH を使って書くことを推奨します。
 
 ```sql
--- 良い例
+-- Good
 SELECT
   post_count
 , COUNT(*) AS freq
@@ -332,7 +363,7 @@ GROUP BY
   post_count
 ;
 
--- 悪い例
+-- NG
 SELECT
   post_count
 , COUNT(*) AS freq
@@ -350,4 +381,25 @@ GROUP BY
   post_count
 ;
 
+```
+
+EXIST 句も同様に括弧内をインデントします。カッコは EXISTS と同階層とします。
+
+```sql
+-- Good
+SELECT
+  u.name
+FROM
+  users AS u
+WHERE
+  EXISTS
+  (
+    SELECT
+      1
+    FROM
+      microposts
+    WHERE
+      user_id = u.id
+  )
+;
 ```
