@@ -19,7 +19,7 @@
 
 ### 基本ルール
 
-- インデントにはタブ文字は使わず、スペース 2 つとします。
+- インデントにはタブ文字は使わず、半角スペース 2 つとします。
 - SQL の予約語 (SELECT, FROM, WHERE, ...) および標準関数 (SUM, COUNT, ...) は大文字とします。
 - SQL をファイルで保存する場合は拡張子を `.sql` とし、 文字コードは UTF-8 (BOM なし) とします。
 - 列や値を区切るカンマは行の先頭に記載します。
@@ -67,6 +67,7 @@ WHERE
   , 4000
   )
 ;
+
 -- NG
 SELECT
   user_id,
@@ -147,6 +148,7 @@ FROM
   posts
 WHERE
   created_at BETWEEN '2015-12-01' AND '2015-12-10'
+  AND post_type = 'article'
 GROUP BY
   created_date
 , user_id
@@ -158,7 +160,7 @@ SELECT
 FROM
   posts
 WHERE
-  created_at BETWEEN '2015-12-01' AND '2015-12-10'
+  created_at BETWEEN '2015-12-01' AND '2015-12-10' AND post_type = 'article'
 GROUP BY
   created_date, user_id
 ;
@@ -194,7 +196,7 @@ WHERE
 
 #### CASE 文は各予約語の前で字下げして改行する
 
-CASE と END をカッコ()に見立てて、それぞれ字下げを行います。
+CASE と END をカッコ () に見立てて、それぞれ字下げを行います。
 どこからどこまでが CASE 文なのか、条件式はどこまでかをわかりやすくするために、改行・字下げをします。
 
 ```sql
@@ -253,7 +255,7 @@ FROM
 
 #### JOIN 句は字下げして、ON は更に字下げする
 
-JOIN 句を字下げせず、ON とそれに続く条件式をインデントします。
+JOIN 句は字下げして、ON とそれに続く条件式は更に字下げします。
 
 ```sql
 -- Good
@@ -383,7 +385,7 @@ GROUP BY
 
 ```
 
-EXIST 句も同様に括弧内をインデントします。カッコは EXISTS と同階層とします。
+EXISTS 句も同様に括弧内をインデントします。カッコは EXISTS と同階層とします。
 
 ```sql
 -- Good
