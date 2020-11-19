@@ -168,7 +168,7 @@ FROM users
 
 #### 1 カラム 1 行にする
 
-SELECT、WHERE、WHERE で指定するカラムや条件式は、1 行に 1 つまでとし、1 行に複数を記述しないようにします。
+SELECT、WHERE、GROUP BY、ORDER BY で指定するカラムや条件式は、1 行に 1 つまでとし、1 行に複数を記述しないようにします。
 
 ```sql
 -- Good
@@ -183,6 +183,9 @@ WHERE
 GROUP BY
   created_date
 , user_id
+ORDER BY
+  created_date
+, post_count
 ;
 
 -- NG
@@ -193,6 +196,8 @@ WHERE
   created_at BETWEEN '2015-12-01' AND '2015-12-10' AND post_type = 'article'
 GROUP BY
   created_date, user_id
+ORDER BY
+  created_date, post_count
 ;
 ```
 
