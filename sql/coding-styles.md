@@ -87,6 +87,7 @@ SQL の構文構造を決める予約語の後は改行します。ただし、�
 
 ```sql
 SELECT
+SET
 WHERE
 GROUP BY
 ORDER BY
@@ -106,7 +107,8 @@ GROUP BY
   created_date
 ;
 
-UPDATE posts SET
+UPDATE posts
+SET
   content = 'hoge'
 WHERE
   id = 1
