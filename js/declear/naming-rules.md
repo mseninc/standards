@@ -118,7 +118,7 @@ import insideDirectory from './insideDirectory/index'; // 明示的にフォル�
 import CheckBox from './CheckBox'; // すべてパスカルケースで記述されています
 import fortyTwo from './fortyTwo'; // すべてキャメルケースで記述されています
 import insideDirectory from './insideDirectory'; // すべてキャメルケースで記述され、indexは暗黙のものとして扱っています
-// ^ insideDirectory.jsとinsideDirectory/index.jsのどちらも扱えます
+// ^ 上記の書き方でinsideDirectory.jsとinsideDirectory/index.jsのどちらもエクスポートされます
 ```
 * 関数をデフォルトエクスポートする場合、キャメルケースを使用すること。ファイル名は関数名と同じにすること。
 ```js
@@ -176,16 +176,16 @@ const requests = [
   // ...
 ];
 ```
-* （1）エクスポートされ、（2）`const`であり、そして（3）プログラマが、ネストされたプロパティも含めて、変更しないと信頼できる場合に限り、定数を大文字にすることができます。
+* （1）エクスポートされ、（2）`const`であり、そして（3）ネストされたプロパティも含めて、プログラマが変更しないと信頼できる場合に限り、定数を大文字にすることができます。
 ```js
 // bad
-const PRIVATE_VARIABLE = 'エクスポートされていないものを不必要に大文字にしないでください';
+const PRIVATE_VARIABLE = 'should not be unnecessarily uppercased within a file'; // エクスポートされていないものを不必要に大文字にしないでください
 
 // bad
-export const THING_TO_BE_CHANGED = '定数が大文字ではありません';
+export const THING_TO_BE_CHANGED = 'should obviously not be uppercased'; // 定数が大文字ではありません
 
 // bad
-export let REASSIGNABLE_VARIABLE = '変数に大文字を使用しないでください';
+export let REASSIGNABLE_VARIABLE = 'do not use let with uppercase variables'; // 変数に大文字を使用しないでください
 
 // ---
 
