@@ -1,7 +1,8 @@
 ## 変数
 
-* 変数を宣言する際は、常に`const`か`let`を使用すること。使用しない場合はグローバル変数として宣言されてしまいます。グローバルな名前空間を汚染しないようにしましょう。
-```js // bad
+* 変数を宣言する際は、常に`const`か`let`を使用すること。使用しない場合はグローバル変数として宣言されてしまいます。
+```js
+// bad
 superPower = new SuperPower();
 
 // good
@@ -15,7 +16,6 @@ const items = getItems(),
     dragonball = 'z';
 
 // bad
-// (compare to above, and try to spot the mistake)
 const items = getItems(),
     goSportsTeam = true;
     dragonball = 'z';
