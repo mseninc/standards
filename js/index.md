@@ -16,6 +16,6 @@
 
 ## 目次
 
-- [コーディング規約](./condition/index.md)
-- [命名規則](./declear/naming-rules.md)
-- [その他](./extr/index.md)
+- [コーディング規約](./coding-style/index.md)
+- [命名規則](./naming-rules/naming-rules.md)
+- [その他](./misc/index.md)
