@@ -17,4 +17,31 @@ function getFullName({ firstName, lastName }) {
 ```
 という風にして下さい。
 * 配列の構造化代入を使用して下さい。
+```js
+const arr = [1, 2, 3, 4];
+
+// bad
+const first = arr[0];
+const second = arr[1];
+
+// good
+const [first, second] = arr;
+```
 * 複数の値を返却する場合は、配列の構造化代入ではなく、オブジェクトの構造化代入を使用すること。こうすることで、後で新しいプロパティを追加したり、呼び出し元に影響することなく順序を変更することができます。
+```js
+// bad
+function processInput(input) {
+  return [left, right, top, bottom];
+}
+
+// 呼び出し元で返却されるデータの順番を考慮する必要があります。
+const [left, __, top] = processInput(input);
+
+// good
+function processInput(input) {
+  return { left, right, top, bottom };
+}
+
+// 呼び出し元は必要なデータのみ選択すればいい。
+const { left, top } = processInput(input);
+```

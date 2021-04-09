@@ -2,17 +2,18 @@
 
 * プリミティブ型は値を直接操作して下さい。
 また、参照型は参照を通して値を操作して下さい。
+```js
+const foo = 1;
+let bar = foo;
 
-### プリミティブ型
+bar = 9;
 
-* `string`
-* `number`
-* `boolean`
-* `null`
-* `undefined`
+console.log(foo, bar); // => 1, 9
 
-### 参照型
+const foo = [1, 2];
+const bar = foo;
 
-* `object`
-* `array`
-* `function`
+bar[0] = 9;
+
+console.log(foo[0], bar[0]); // => 9, 9
+```

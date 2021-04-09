@@ -19,11 +19,97 @@ const obj = {
 ```
 として下さい。
 * メソッドやプロパティの記述は短縮構文を使用して下さい。
+```js
+// bad
+const atom = {
+  value: 1,
+
+  addValue: function (value) {
+    return atom.value + value;
+  },
+};
+
+// good
+const atom = {
+  value: 1,
+
+  addValue(value) {
+    return atom.value + value;
+  },
+};
+```
 * プロパティの短縮構文はオブジェクト宣言の先頭にまとめて下さい。
 どのプロパティが短縮構文を利用しているか分かりやすいからです。
+```js
+const lukeSkywalker = 'Luke Skywalker';
+
+// bad
+const obj = {
+  lukeSkywalker: lukeSkywalker,
+};
+
+// good
+const obj = {
+  lukeSkywalker,
+};
+```
 *  無効な識別子の場合のみプロパティを引用符で括ること。
 一般的にこちらの方が読みやすいと考えてられています。これは構文の強調表示を改善し、また多くのJSエンジンによってより簡単に最適化されます。
-* `hasOwnProperty`、`propertyIsEnumerable`、`isPrototypeOf`のような`Object.prototype`の関数を直接呼び出さないで下さい。これらのメソッドはオブジェクトのプロパティによって隠されている可能性があるかもしれません - `{ hasOwnProperty：false }`のようなケースを考えてください - あるいは、オブジェクトはnullオブジェクト( `Object.create(null)` )になっているかもしれません。
+```js
+const anakinSkywalker = 'Anakin Skywalker';
+const lukeSkywalker = 'Luke Skywalker';
+
+// bad
+const obj = {
+  episodeOne: 1,
+  twoJediWalkIntoACantina: 2,
+  lukeSkywalker,
+  episodeThree: 3,
+  mayTheFourth: 4,
+  anakinSkywalker,
+};
+
+// good
+const obj = {
+  lukeSkywalker,
+  anakinSkywalker,
+  episodeOne: 1,
+  twoJediWalkIntoACantina: 2,
+  episodeThree: 3,
+  mayTheFourth: 4,
+};
+```
+* `hasOwnProperty`、`propertyIsEnumerable`、`isPrototypeOf`のような`Object.prototype`の関数を直接呼び出さないで下さい。
+```js
+// bad
+console.log(object.hasOwnProperty(key));
+
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key));
+
+// best
+const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
+/* or */
+import has from 'has'; // https://www.npmjs.com/package/has
+// ...
+console.log(has.call(object, key));
+```
+* 無効な識別子の場合のみプロパティを引用符で括ること。
+```js
+// bad
+const bad = {
+  'foo': 3,
+  'bar': 4,
+  'data-blah': 5,
+};
+
+// good
+const good = {
+  foo: 3,
+  bar: 4,
+  'data-blah': 5,
+};
+```
 * オブジェクトをシャローコピーする場合は`Object.assign`よりもオブジェクトスプレッド構文を使用すること。特定のプロパティを省略した新しいオブジェクトを取得するには、オブジェクトのレスト演算子を使用すること。
 以下に例を記します。
 ```js
