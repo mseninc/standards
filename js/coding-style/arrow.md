@@ -114,7 +114,7 @@ const itemHeight = (item) => {
   return height <= 256 ? largeSize : smallSize;
 };
 ```
-* 暗黙的な戻り値でアロー関数本体の位置を強制すること。
+* アロー関数を使用する場合は、一行に収めるか括弧を用いてスコープを明確にする。
 ```js
 // bad
 foo =>

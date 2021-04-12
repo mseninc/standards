@@ -26,7 +26,7 @@ const short = function longUniqueMoreDescriptiveLexicalFoo() {
 ```
 * 関数ではないブロック(`if`, `while`, など)の中で関数を定義しない。代わりに変数に関数を割り当てること。ブラウザは実行を許可しますが、すべて違う動作をします。
 * 引数に`arguments`を指定しないで下さい。関数スコープに渡される`arguments`オブジェクトの参照を上書きしてしまいます。
-* `arguments`を利用しない。代わりにrest syntax`...`を使用すること。`...`を利用することで、いつくかの引数を利用したいことを明らかにすることができます。加えてrest引数は`arguments`の様なArray-likeなオブジェクトではなく正真正銘のArrayです。
+* `arguments`をせず、代わりにレスト構文`...`を使用すること。`...`を利用することで、どの引数を利用したいかを明示することができます。加えてレスト引数は`arguments`の様なArray-likeな配列ではなく正真正銘の配列です。
 ```js
 // bad
 function concatenateAll() {
@@ -104,7 +104,7 @@ function f2(obj) {
   const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
 }
 ```
-* 引数を再割り当てしない。特に`arguments`オブジェクトにアクセスするとき、引数を再割り当てすると予期しない動作をする可能性があります。 特にV8では最適化の問題も発生する可能性があります。
+* 引数に代入しない。
 ```js
 // bad
 function f1(a) {

@@ -81,6 +81,12 @@ function foo() {
     console.log(this);
   };
 }
+
+//good
+function foo(){
+  const thisFoo = foo.bind(foo);
+  return thisFoo;
+}
 ```
 
 * ファイルを1つのクラスとしてエクスポートする場合、ファイル名はクラス名と完全に一致させること。
@@ -108,14 +114,10 @@ import InsideDirectory from './InsideDirectory'; // fortyTwoと同様です
 import CheckBox from './check_box'; // ファイル名がスネークケースです
 import forty_two from './forty_two'; // キャメルケースでエクスポートされているものをスネークケースでインポートしています
 import inside_directory from './inside_directory'; // fortyTwoと同様です
-import index from './inside_directory/index'; // 明示的にフォルダを挟んでいます
-import insideDirectory from './insideDirectory/index'; // 明示的にフォルダを挟んでいます
 
 // good
 import CheckBox from './CheckBox'; // すべてパスカルケースで記述されています
 import fortyTwo from './fortyTwo'; // すべてキャメルケースで記述されています
-import insideDirectory from './insideDirectory'; // すべてキャメルケースで記述され、indexは暗黙のものとして扱っています
-// ^ 上記の書き方でinsideDirectory.jsとinsideDirectory/index.jsのどちらもエクスポートされます
 ```
 
 * 関数をデフォルトエクスポートする場合、キャメルケースを使用すること。ファイル名は関数名と同じにすること。
@@ -148,7 +150,6 @@ const freeObject = {
 
 export default freeObject;
 ```
-
 * （1）エクスポートされ、（2）`const`であり、そして（3）ネストされたプロパティも含めて、プログラマが変更しないと信頼できる場合に限り、定数を大文字にすることができます。
 
 ```js

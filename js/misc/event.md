@@ -12,7 +12,7 @@ $(this).on('listingUpdated', function(e, listingId) {
   // do something with listingId
 });
 ```
-こちらの方が好まれます:
+こちらの方が好まれます。
 ```js
 // good
 $(this).trigger('listingUpdated', { listingId: listing.id });
