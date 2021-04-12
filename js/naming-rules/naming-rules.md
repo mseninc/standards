@@ -84,8 +84,9 @@ function foo() {
 
 //good
 function foo(){
-  const thisFoo = foo.bind(foo);
-  return thisFoo;
+  return (function() {
+    console.log(this);
+  }).bind(this);
 }
 ```
 
