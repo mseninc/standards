@@ -25,8 +25,19 @@ const short = function longUniqueMoreDescriptiveLexicalFoo() {
 }());
 ```
 * 関数ではないブロック(`if`, `while`, など)の中で関数を定義しない。代わりに変数に関数を割り当てること。ブラウザは実行を許可しますが、すべて違う動作をします。
-* 引数に`arguments`を指定しないで下さい。関数スコープに渡される`arguments`オブジェクトの参照を上書きしてしまいます。
-* `arguments`をせず、代わりにレスト構文`...`を使用すること。`...`を利用することで、どの引数を利用したいかを明示することができます。加えてレスト引数は`arguments`の様なArray-likeな配列ではなく正真正銘の配列です。
+* パラメータの名前を`arguments`にしてはいけません。これは、すべての関数スコープに与えられている`arguments`オブジェクトよりも優先されます。
+```js
+// bad
+function foo(name, options, arguments) {
+  // ...
+}
+
+// good
+function foo(name, options, args) {
+  // ...
+}
+```
+* `arguments`を使用せず、代わりにレスト構文`...`を使用すること。`...`を利用することで、どの引数を利用したいかを明示することができます。
 ```js
 // bad
 function concatenateAll() {
@@ -73,7 +84,7 @@ count(3); // 3
 count();  // 3
 ```
 * `function handleThings(name, opts = {})`という風に常にデフォルト引数は末尾に配置すること。
-* 新しい関数を作成するためにFunctionコンストラクタを使用しない。この方法で文字列を評価させて新しい関数を作成することは、eval()と同様の脆弱性を引き起こします。
+* 新しい関数を作成するためにFunctionコンストラクタを使用しない。eval()と同じ脆弱性を引き起こします。
 ```js
 // bad
 var add = new Function('a', 'b', 'return a + b');
