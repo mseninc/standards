@@ -46,7 +46,7 @@ const nodes = [...foo];
 * array-likeオブジェクトを配列に変換する場合は、
 `const arr = Array.prototype.slice.call(arrLike);`とするのではなく、
 `const arr = Array.from(arrLike);`という風に`Array.from`を使用すること。
-* 繰り返し可能なオブジェクト(iterables)へのマッピングにはスプレッド構文`...`の代わりに`Array.from`を使用すること。理由は中間配列の作成を防ぐためです。
+* 中間配列の作成を避けるため、反復可能なデータのマッピングには スプレッド構文 `...` ではなく、`Array.from` を使用してください。
 ```js
 // bad
 const baz = [...foo].map(bar);
