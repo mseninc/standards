@@ -1,6 +1,7 @@
 ## 文字列
 
-* 文字列にはシングルクオート `''` を使用して下さい。
+文字列にはシングルクオート `''` を使用して下さい。
+
 ```js
 // bad
 const name = "Capt. Janeway";
@@ -11,8 +12,9 @@ const name = `Capt. Janeway`;
 // good
 const name = 'Capt. Janeway';
 ```
-* 100文字以上になるような文字列は、文字列連結を使用して複数行にまたがって記述しない。
-作業するうえで負担になる上にコードの検索容易性を損ないます。
+
+文字列検索の観点から、長い文字列リテラルであっても見栄えのために文字列連結などで複数にまたがって記述せず、 1 行で記述してください。
+
 ```js
 // bad
 const errorMessage = 'This is a super long error that was thrown because \
@@ -28,7 +30,10 @@ const errorMessage = 'This is a super long error that was thrown because ' +
 // good
 const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 ```
-* プログラムで文字列を生成する場合は、文字列連結ではなく、テンプレート文字列を使用すること。テンプレート文字列は文字列補完機能・複数行文字列機能を持つ簡潔な構文で、可読性が良いからです。
+
+文字列の一部に変数の値や式の評価結果などを組み込みたい場合、文字列全体をバッククウォート (``` `` ```) で囲み、式を `${}` で囲ってください。
+`${}` で式を囲う際には、不要なスペースは入れないでください。
+
 ```js
 // bad
 function sayHi(name) {
@@ -50,8 +55,9 @@ function sayHi(name) {
   return `How are you, ${name}?`;
 }
 ```
-* 絶対に`eval()`を利用しない。脆弱性の原因になります。
-* 文字列の中で文字を不必要にエスケープしない。バックスラッシュは可読性を損なうため、必要なときにだけ存在させるべきです。
+
+可読性を保つために、可能な限り文字列内でのバックスラッシュ (`\`) によるエスケープを避けてください。
+
 ```js
 // bad
 const foo = '\'this\' \i\s \"quoted\"';

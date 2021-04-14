@@ -1,29 +1,44 @@
 ## オブジェクト
 
-* オブジェクトを作成する際は、`const item = new Object();`とせず、`const item = {};`という風にリテラル構文を使用して下さい。
-* 動的にプロパティ名を持つオブジェクトを作成する場合、
+* オブジェクトを作成する際は、オブジェクトのリテラル構文 (`{}`) を使用して下さい。
+
 ```js
+// bad
+const item = new Object();
+
+// good
+const item = {};
+```
+
+* 動的にプロパティ名を持つオブジェクトを作成する場合、
+
+動的なプロパティ名を持つオブジェクトを生成する際には、そのプロパティ名を生成する式を `[]` で囲ってキーとしてください。
+
+```js
+// bad
 const obj = {
   id: 5,
   name: 'San Francisco',
 };
 obj[getKey('enabled')] = true;
-```
-とせず、
-```js
+
+// good
 const obj = {
   id: 5,
   name: 'San Francisco',
   [getKey('enabled')]: true,
 };
 ```
-として下さい。
-* メソッドやプロパティの記述は短縮構文を使用して下さい。
+
+メソッドやプロパティの記述は短縮構文を使用して下さい。
+プロパティ名と値を格納する変数名が同じ場合はプロパティ名のみを記述します。
+メソッドを定義する場合は、プロパティの値に関数を指定するのではなく、 `メソッド名(引数){ 文 }` のように定義してください。
+
 ```js
 // bad
+const value = 1;
 const atom = {
-  value: 1,
-
+  value: value,
   addValue: function (value) {
     return atom.value + value;
   },
@@ -31,30 +46,16 @@ const atom = {
 
 // good
 const atom = {
-  value: 1,
-
+  value,
   addValue(value) {
     return atom.value + value;
   },
 };
 ```
-* プロパティの短縮構文はオブジェクト宣言の先頭にまとめて下さい。
+
+プロパティの短縮構文はオブジェクト宣言の先頭にまとめて下さい。
 どのプロパティが短縮構文を利用しているか分かりやすいからです。
-```js
-const lukeSkywalker = 'Luke Skywalker';
 
-// bad
-const obj = {
-  lukeSkywalker: lukeSkywalker,
-};
-
-// good
-const obj = {
-  lukeSkywalker,
-};
-```
-* 無効な識別子の場合のみプロパティを引用符で括ること。
-一般的にこちらの方が読みやすいと考えられています。これは構文の強調表示を改善し、また多くのJSエンジンによってより簡単に最適化されます。
 ```js
 const anakinSkywalker = 'Anakin Skywalker';
 const lukeSkywalker = 'Luke Skywalker';
@@ -79,22 +80,9 @@ const obj = {
   mayTheFourth: 4,
 };
 ```
-* `hasOwnProperty`、`propertyIsEnumerable`、`isPrototypeOf`のような`Object.prototype`の関数を直接呼び出さないで下さい。
-```js
-// bad
-console.log(object.hasOwnProperty(key));
 
-// good
-console.log(Object.prototype.hasOwnProperty.call(object, key));
+変数名として無効なプロパティ名を指定する場合のみ、プロパティを引用符で括ってください。
 
-// best
-const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
-/* or */
-import has from 'has'; // https://www.npmjs.com/package/has
-// ...
-console.log(has.call(object, key));
-```
-* 無効な識別子の場合のみプロパティを引用符で括ること。
 ```js
 // bad
 const bad = {
@@ -110,7 +98,32 @@ const good = {
   'data-blah': 5,
 };
 ```
-* オブジェクトをシャローコピーする場合は`Object.assign`よりもオブジェクトスプレッド構文を使用すること。特定のプロパティを省略した新しいオブジェクトを取得するには、オブジェクトのレスト構文`...`を使用すること。
+
+`hasOwnProperty`, `propertyIsEnumerable`, `isPrototypeOf` のような `Object.prototype` のメソッドをインスタンスから直接起動しないでください。
+
+```js
+// bad
+console.log(obj.hasOwnProperty(key));
+
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key));
+
+// best
+const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
+/* or */
+import has from 'has'; // https://www.npmjs.com/package/has
+
+console.log(has.call(obj, key));
+```
+
+オブジェクトをシャローコピーする場合はスプレッド演算子を使用してください。
+特定のプロパティを省略した新しいオブジェクトを取得するには、オブジェクトのレスト演算子 (`...`) を使用すること。
+<!-- [NOTES]
+... 演算子が文脈によって「スプレッド演算子」と呼ぶべき場合と「レスト演算子」と呼ぶべき場合が存在する。
+同じ演算子なので名称をできれば統一したいが、すべての場合で「スプレッド演算子」と名付けてしまうのは少し乱暴。
+どうすべきか検討する。
+-->
+
 ```js
 // very bad
 const original = { a: 1, b: 2 };

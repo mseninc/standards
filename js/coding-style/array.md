@@ -1,6 +1,7 @@
 ## 配列
 
-* 配列を作成する際は、オブジェクトの作成と同じようにリテラル構文を使用して下さい。
+配列を作成する際は、配列のリテラル構文 (`[]`) を使用して下さい。
+
 ```js
 // bad
 const items = new Array();
@@ -8,7 +9,9 @@ const items = new Array();
 // good
 const items = [];
 ```
-* 直接配列に項目を代入せず、Array#pushを使用して下さい。
+
+配列の要素を追加する場合は `Array#push()` を使用してください。
+
 ```js
 const someStack = [];
 
@@ -18,7 +21,9 @@ someStack[someStack.length] = 'abracadabra';
 // good
 someStack.push('abracadabra');
 ```
-* 配列をコピーする場合は、`const itemsCopy = [...items];`という風に配列の拡張演算子`...`を使用して下さい。
+
+配列をコピーする場合はスプレッド構文 (`...`) を使用してください。
+
 ```js
 // bad
 const len = items.length;
@@ -32,7 +37,9 @@ for (i = 0; i < len; i++) {
 // good
 const itemsCopy = [...items];
 ```
-* 繰り返し可能なオブジェクトを配列に変換する場合は、
+
+繰り返し可能なオブジェクトを配列に変換する場合は、 `Array.from()` の代わりにスプレッド演算子 (`...`) を使用してください。
+
 ```js
 const foo = document.querySelectorAll('.foo');
 
@@ -42,19 +49,30 @@ const nodes = Array.from(foo);
 // best
 const nodes = [...foo];
 ```
-という風に`Array.from`の代わりにスプレッド構文`...`を使用して下さい。
-* array-likeオブジェクトを配列に変換する場合は、
-`const arr = Array.prototype.slice.call(arrLike);`とするのではなく、
-`const arr = Array.from(arrLike);`という風に`Array.from`を使用すること。
-* 中間配列の作成を避けるため、反復可能なデータのマッピングには スプレッド構文 `...` ではなく、`Array.from` を使用してください。
+
+Array-like なオブジェクトを配列に変換する際には、 `Array.from()` を使用してください。
+
 ```js
 // bad
-const baz = [...foo].map(bar);
+const arr = Array.prototype.slice.call(arrLike);
 
 // good
-const baz = Array.from(foo, bar);
+const arr = Array.from(arrLike);
 ```
-* 配列のコールバック関数の中ではreturn構文を使用すること。もし関数の中が副作用のない式を返す一行で構成されている場合はreturnを省略してもかまいません。
+
+列挙可能なオブジェクトを `map()` などで変換する場合は、 一時的な配列が生成されることを防ぐために `Array.from()` を使用してください。
+
+```js
+// bad
+const result = [...iterable].map(x => f(x));
+
+// good
+const result = Array.from(iterable, x => f(x));
+```
+
+配列のコールバック関数の中では `return` 構文を使用してください。
+ただし、関数が副作用を持たない、単一の式を返す場合は `return` を省略します。
+
 ```js
 // good
 [1, 2, 3].map((x) => {
@@ -65,7 +83,7 @@ const baz = Array.from(foo, bar);
 // good
 [1, 2, 3].map(x => x + 1);
 
-// bad - 値を返さないために`acc`は最初の繰り返しのあとでundefinedになります。
+// bad - 値を返さないために acc は最初の繰り返しのあとでundefinedになります。
 [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
   const flatten = acc.concat(item);
   acc[index] = flatten;
@@ -98,7 +116,10 @@ inbox.filter((msg) => {
   return false;
 });
 ```
-* 配列が複数行ある場合、配列の開始の括弧の後と、最後の括弧の前に改行を入れること。
+
+配列が複数行ある場合、配列の開始の括弧の後と、最後の括弧の前に改行を入れてください。
+また、改行する場合はすべての配列の要素の最後にカンマ (`,`) を入れてください。
+
 ```js
 // bad
 const arr = [
