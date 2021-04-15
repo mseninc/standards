@@ -42,7 +42,7 @@ function foo(name, options, args) {
 }
 ```
 
-可変引数の引数には `arguments`を使用せず、レスト構文 (`...`) を使用してください。
+可変引数の引数には `arguments`を使用せず、 `...` 演算子を使用してください。
 
 ```js
 // bad
