@@ -1,10 +1,13 @@
 ## プロパティ
 
-* プロパティにアクセスする場合はドット(`.`)を使用すること。
+プロパティにアクセスする場合は可能な限りドット (`.`) を使用してください。
+ただし、プロパティ名に変数名として利用可能でない文字が含まれる場合はこの限りではありません。
+
 ```js
 const luke = {
   jedi: true,
   age: 28,
+  'i-know-him': false
 };
 
 // bad
@@ -12,8 +15,11 @@ const isJedi = luke['jedi'];
 
 // good
 const isJedi = luke.jedi;
+const iKnowHim = luke['i-know-him'];
 ```
-* 変数を使用してプロパティにアクセスする場合は角括弧(`[]`)を使用すること
+
+変数を使用してプロパティにアクセスする場合は角括弧 (`[]`) を使用してください。
+
 ```js
 const luke = {
   jedi: true,
@@ -25,12 +31,4 @@ function getProp(prop) {
 }
 
 const isJedi = getProp('jedi');
-```
-* べき乗を計算するときは、べき乗演算子`**`を使用すること。
-```js
-// bad
-const binary = Math.pow(2, 10);
-
-// good
-const binary = 2 ** 10;
 ```
