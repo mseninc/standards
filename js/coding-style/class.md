@@ -1,6 +1,7 @@
 ## クラスとコンストラクター
 
-* `prototype`を直接操作することを避け、常に`class`を使用すること。
+クラスを定義する際は `class` 構文を使用してください。
+
 ```js
 // bad
 function Queue(contents = []) {
@@ -24,7 +25,9 @@ class Queue {
   }
 }
 ```
-* 継承には`extends`を使用すること。
+
+クラスを継承する際は `extends` を使用してください。
+
 ```js
 // bad
 const inherits = require('inherits');
@@ -43,7 +46,9 @@ class PeekableQueue extends Queue {
   }
 }
 ```
-* メソッドの戻り値で`this`を返すことでメソッドチェーンを助けること。
+
+メソッドチェーンを実現する場合はメソッドの返り値に `this` を利用してください。
+
 ```js
 // bad
 Jedi.prototype.jump = function () {
@@ -77,7 +82,9 @@ const luke = new Jedi();
 luke.jump()
   .setHeight(20);
 ```
-* 独自の`toString()`の作成は認めますが、正しく動作することと副作用がないことを確認すること。
+
+独自クラスに `toString()` を実装する際には副作用なく正常に動作するようにしてください。
+
 ```js
 class Jedi {
   constructor(options = {}) {
@@ -93,7 +100,9 @@ class Jedi {
   }
 }
 ```
-* 一つも指定されていない場合、クラスにはデフォルトのコンストラクタがあります。空のコンストラクタ関数やただ親クラスに移譲するだけのものは不要です。
+
+コンストラクタに処理を記述しない場合や、親クラスのコンストラクタに移譲するだけの場合は、コンストラクタの定義を省略してください。
+
 ```js
 // bad
 class Jedi {
@@ -119,7 +128,9 @@ class Rey extends Jedi {
   }
 }
 ```
-* クラスのメンバの重複を避ける。重複したクラスメンバの宣言は暗黙的に最後のものが適用されます。重複を持っていれば、それはほぼ確実にバグです。
+
+バグを引き起こす原因となるので、クラスのメンバの重複定義をしないでください。
+
 ```js
 // bad
 class Foo {
