@@ -1,7 +1,7 @@
 ## アクセサ
 
-* プロパティのためのアクセサ関数は必須ではありません。
-* JavaScriptのゲッター/セッターは使用しないこと。代わりに、アクセサ関数を作るのであれば、`getVal()`とか`setVal('hello')`とすること。
+JavaScript の ゲッター/セッターは使用せず、 `getVal()` や `setVal('hello')` などのアクセサ関数を作成してください。
+
 ```js 
 // bad
 class Dragon {
@@ -25,7 +25,9 @@ class Dragon {
   }
 }
 ```
-* プロパティ/メソッドが`boolean`の場合は、`isVal()`または`hasVal()`を使用すること。
+
+プロパティ/メソッドが `boolean` の場合は、 `isVal()` または `hasVal()` のように命名してください。
+
 ```js
 // bad
 if (!dragon.age()) {
@@ -37,7 +39,9 @@ if (!dragon.hasAge()) {
   return false;
 }
 ```
-* `get()`や`set()`という関数を作成しても構いませんが、一貫性を持たせてください。
+
+`get()` や `set()` という関数を作成する場合、名前と処理に一貫性を持たせてください。
+
 ```js
 class Jedi {
   constructor(options = {}) {
