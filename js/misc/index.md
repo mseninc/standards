@@ -2,7 +2,7 @@
 
 ## 目次
 
-- [比較演算子と同等性](./operator.md)
+- [演算子](./operator.md)
 - [アクセサ](./accesor.md)
 - [ブロック](./block.md)
 - [イベント](./event.md)

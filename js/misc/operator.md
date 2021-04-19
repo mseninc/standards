@@ -1,30 +1,9 @@
-## 比較演算子と同等性
+## 演算子
 
-* `if`文のような条件式は`ToBoolean`メソッドによる強制型変換で評価され、常に以下のルールに従います。
-  - オブジェクトはtrueと評価されます。
-  - undefinedはfalseと評価されます。
-  - nullはfalseと評価されます。
-  - 真偽値はboolean型の値として評価されます。
-  - 数値はtrueと評価されます。しかし、+0, -0, NaNの場合は falseです。
-  - 文字列はtrueと評価されます。しかし、空文字`''`の場合はfalse です。
+`if` 文の条件式で変数を評価する場合、文字列と数値に関しては明示的に比較演算を行ってください。
+それら以外に関して `true` または `false` を評価する際は、等価演算子を省略してください。
+
 ```js
-if ([0]) {
-  // 配列はオブジェクトなのでtrueとして評価されます。
-}
-```
-
-* 真偽値にはショートカットを使用しますが、文字列と数値には明示的な比較を使用すること。
-```js
-// bad
-if (isValid === true) {
-  // ...
-}
-
-// good
-if (isValid) {
-  // ...
-}
-
 // bad
 if (name) {
   // ...
@@ -44,51 +23,20 @@ if (collection.length) {
 if (collection.length > 0) {
   // ...
 }
-```
-* `case`と`default`節でブロックを作成するには中括弧(`{}`)を使うこと。(例えば `let`、`const`、`function`、`class`) 字句の宣言は`switch`ブロック全体で見ることができますが、初期化されるのは代入されたときだけで、`case`に到達したときにのみ行われます。このため、複数の`case`節で同じものを定義しようとすると問題が生じます。
-```js
+
 // bad
-switch (foo) {
-  case 1:
-    let x = 1;
-    break;
-  case 2:
-    const y = 2;
-    break;
-  case 3:
-    function f() {
-      // ...
-    }
-    break;
-  default:
-    class C {}
+if (isValid === true) {
+  // ...
 }
 
 // good
-switch (foo) {
-  case 1: {
-    let x = 1;
-    break;
-  }
-  case 2: {
-    const y = 2;
-    break;
-  }
-  case 3: {
-    function f() {
-      // ...
-    }
-    break;
-  }
-  case 4:
-    bar();
-    break;
-  default: {
-    class C {}
-  }
+if (isValid) {
+  // ...
 }
 ```
-* 三項演算子は入れ子にするべきではなく、一般に単一行にします。
+
+三項演算子の入れ子を避け、単一行で記述してください。
+
 ```js
 // bad
 const foo = maybe1 > maybe2
@@ -106,7 +54,9 @@ const foo = maybe1 > maybe2
 // best
 const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
 ```
-* 不要な三項演算子を避ける。
+
+不要な三項演算子を避けてください。
+
 ```js
 // bad
 const foo = a ? a : b;
@@ -118,7 +68,10 @@ const foo = a || b;
 const bar = !!c;
 const baz = !c;
 ```
-* 演算子を混在させる場合は括弧で囲むこと。例外は、標準の算術演算子（`+`、`-`、`*`、`/`）のみです。これにより読みやすさが向上し、開発者の意図が明確になります。
+
+`&&` と `||` などの演算子が混在する場合、演算順序を明確にするために式を括弧で囲ってください。
+ただし、 `+` と `-`, `*` と `/` のように演算順序が同列の算術演算に関しては括弧を省略しても構いません。
+
 ```js
 // bad
 const foo = a && b < 0 || c > 0 || d + 1 === 0;
@@ -132,6 +85,9 @@ if (a || b && c) {
   return d;
 }
 
+// bad
+const bar = a + b / c * d;
+
 // good
 const foo = (a && b < 0) || c > 0 || (d + 1 === 0);
 
@@ -144,5 +100,5 @@ if (a || (b && c)) {
 }
 
 // good
-const bar = a + b / c * d;
+const bar = a + (b / c * d);
 ```
