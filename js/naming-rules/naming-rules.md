@@ -4,11 +4,11 @@
 
 変数名にはそのデータを表す名前を、関数名にはその機能を表す名前をつけるように心がけましょう。
 また、変数名や関数名には **キャメルケース** を、クラス名には **パスカルケース** といった、命名規則を統一することも心がけましょう。
-
 ただし、既存のコードを修正する場合は、そのスタイルに従ってください。
-他のスタイルを混入させることは、品質の劣化となります。
 
-* 1 文字の名前は避け、意味が明確にわかる名前をつけましょう。
+---
+
+1 文字の名前は避け、意味が明確にわかる名前をつけましょう。
 
 ```js
 // bad
@@ -22,7 +22,7 @@ function load() {
 }
 ```
 
-* 変数名、関数名にはキャメルケース（小文字から始まる）を使用しましょう。
+変数名、関数名にはキャメルケース（小文字から始まる）を使用しましょう。
 
 ```js
 // bad
@@ -34,7 +34,7 @@ const thisIsMyObject = {};
 function thisIsMyFunction() {}
 ```
 
-* クラス名にはパスカルケース（大文字から始まる）を使用しましょう。
+クラス名にはパスカルケース（大文字から始まる）を使用しましょう。
 
 ```js
 // bad
@@ -52,7 +52,7 @@ class User {
 }
 ```
 
-* 末尾または先頭のアンダースコアを避けましょう。 JavaScript にアクセス修飾子が存在しないためです。
+末尾または先頭のアンダースコアを避けましょう。 JavaScript にアクセス修飾子が存在しないためです。
 
 ```js
 // bad
@@ -64,7 +64,7 @@ this._firstName = 'Panda';
 this.firstName = 'Panda';
 ```
 
-* `this` の参照を保存するのを避けましょう。アロー関数か Function#bind を利用すること。
+`this` の参照を保存するのを避け、アロー関数か `Function#bind` を利用してください。
 
 ```js
 // bad
@@ -90,7 +90,7 @@ function foo(){
 }
 ```
 
-* ファイルを1つのクラスとしてエクスポートする場合、ファイル名はクラス名と完全に一致させること。
+1 つのクラスをエクスポートするファイルについては、ファイル名とクラス名を大文字小文字を含め完全に一致させてください。
 
 ```js
 // file 1 contents
@@ -121,7 +121,7 @@ import CheckBox from './CheckBox'; // すべてパスカルケースで記述さ
 import fortyTwo from './fortyTwo'; // すべてキャメルケースで記述されています
 ```
 
-* 関数をデフォルトエクスポートする場合、キャメルケースを使用すること。ファイル名は関数名と同じにすること。
+関数をデフォルトエクスポートする場合、キャメルケースを使用し、関数名とファイル名を完全に一致させてください。
 
 ```js
 function makeStyleGuide() {
@@ -129,7 +129,7 @@ function makeStyleGuide() {
 export default makeStyleGuide;
 ```
 
-* コンストラクター / クラス / シングルトン / 関数ライブラリ をエクスポートする場合、パスカルケースを使用すること。
+* コンストラクター、クラス、シングルトン、関数ライブラリをエクスポートする場合、パスカルケースを使用してください。
 
 ```js
 const AirbnbStyleGuide = {
@@ -140,7 +140,7 @@ const AirbnbStyleGuide = {
 export default AirbnbStyleGuide;
 ```
 
-* オブジェクトをエクスポートする場合もパスカルケースを使用すること。
+オブジェクトをエクスポートする場合もパスカルケースを使用してください。
 
 ```js
 const freeObject = {
@@ -150,36 +150,4 @@ const freeObject = {
 };
 
 export default freeObject;
-```
-* （1）エクスポートされ、（2）`const`であり、そして（3）ネストされたプロパティも含めて、プログラマが変更しないと信頼できる場合に限り、定数を大文字にすることができます。
-
-```js
-// bad
-const PRIVATE_VARIABLE = 'should not be unnecessarily uppercased within a file'; // エクスポートされていないものを不必要に大文字にしないでください
-
-// bad
-export const THING_TO_BE_CHANGED = 'should obviously not be uppercased'; // 定数が大文字ではありません
-
-// bad
-export let REASSIGNABLE_VARIABLE = 'do not use let with uppercase variables'; // 変数に大文字を使用しないでください
-
-// ---
-
-// 許可される例ですが、意味がありません
-export const apiKey = 'SOMEKEY';
-
-// better in most cases
-export const API_KEY = 'SOMEKEY';
-
-// ---
-
-// bad - 意味がないのにKEYを大文字にしています
-export const MAPPING = {
-  KEY: 'value'
-};
-
-// good
-export const MAPPING = {
-  key: 'value'
-};
 ```
