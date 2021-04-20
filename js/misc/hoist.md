@@ -1,6 +1,7 @@
 ## 巻き上げ
 
-* `var`宣言は、それらに最も近い包含関数スコープの一番上に引き上げられますが、代入された値は引き継がれません。
+`var` 宣言は、それらに最も近い包含関数スコープの一番上に引き上げられますが、代入された値は引き継がれません。
+
 ```js
 // notDefinedがグローバル変数に存在しない場合、うまく動作しません。
 function example() {
@@ -30,7 +31,9 @@ function example() {
   const declaredButNotAssigned = true;
 }
 ```
-* 無名関数の場合、関数が割当てされる前の変数が巻き上げられます。
+
+無名関数の場合、関数が割当てされる前の変数が巻き上げられます。
+
 ```js
 function example() {
   console.log(anonymous); // => undefined
@@ -42,7 +45,9 @@ function example() {
   };
 }
 ```
-* 名前付き関数の場合も同様に変数が巻き上げられます。関数名や関数本体は巻き上げられません。
+
+名前付き関数の場合も同様に変数が巻き上げられます。関数名や関数本体は巻き上げられません。
+
 ```js
 function example() {
   console.log(named); // => undefined
@@ -67,7 +72,9 @@ function example() {
   }
 }
 ```
-* 関数宣言は関数名と関数本体が巻き上げられます。
+
+関数宣言は関数名と関数本体が巻き上げられます。
+
 ```js
 function example() {
   superPower(); // => Flying
