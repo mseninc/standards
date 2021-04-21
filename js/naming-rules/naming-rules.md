@@ -129,7 +129,7 @@ function makeStyleGuide() {
 export default makeStyleGuide;
 ```
 
-* コンストラクター、クラス、シングルトン、関数ライブラリをエクスポートする場合、パスカルケースを使用してください。
+コンストラクター、クラス、シングルトン、関数ライブラリをエクスポートする場合、パスカルケースを使用してください。
 
 ```js
 const AirbnbStyleGuide = {
