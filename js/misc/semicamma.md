@@ -14,6 +14,17 @@
 
 問題の解決策に対する注釈として `// TODO:` を使用して下さい。
 
+```js
+    /**
+    .....
+    */
+    
+    // comment
+
+    // FIXME: 問題に対する注釈
+    // TODO: 問題の解決策
+```
+
 ## 空白
 
 半角スペース2文字を使用して下さい。
@@ -58,6 +69,38 @@
 
 先頭のカンマは禁止。末尾につけて下さい。
 
+```js
+// bad
+const hero = {
+    firstName: 'Ada'
+  , lastName: 'Lovelace'
+  , birthYear: 1815
+  , superPower: 'computers'
+};
+
+// good
+const hero = {
+  firstName: 'Ada',
+  lastName: 'Lovelace',
+  birthYear: 1815,
+  superPower: 'computers',
+};
+```
+
 ## セミコロン
 
 改行をする時は必ずつけて下さい。
+
+```js
+// bad
+function foo() {
+  return
+    'search your feelings, you know it to be foo'
+}
+
+// good
+function foo() {
+  return 
+    'search your feelings, you know it to be foo';
+}
+```
