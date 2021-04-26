@@ -40,9 +40,9 @@ function setSidebar() {
 }
 ```
 
-DOMの検索には、 `$('.sidebar ul')`や`$('.sidebar > ul')` のカスケードを使用して下さい。
+DOMの検索には、 `$('.sidebar ul')`や`$('.sidebar > ul')` のように CSS セレクタを使用して下さい。
 
-jQueryオブジェクトの検索には、スコープ付きの `find` を使用して下さい。
+jQueryオブジェクトの検索には、スコープ付きの `find()` を使用して下さい。
 
 ```js
 // bad
