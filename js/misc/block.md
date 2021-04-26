@@ -1,6 +1,6 @@
 ## ブロック
 
-複数行のブロックには中括弧（ `{}` ）を使用して下さい。
+複数行のブロックには中括弧（`{}`）を使用して下さい。
 
 ```js
 // bad
@@ -24,7 +24,7 @@ function bar() {
 }
 ```
 
-`if` と `else` を使った複数行のブロックの場合は、 `else` ブロックの閉じ括弧と同じ行に `else` を置いてください。
+`if` と `else` を使った複数行のブロックの場合は、 `if` ブロックの閉じ括弧と同じ行に `else` を置いてください。
 
 ```js
 // bad
@@ -45,9 +45,7 @@ if (test) {
 }
 ```
 
-`if` ブロックが `return` 文を必ず実行するのであれば、 `else` ブロックは不要です。
-
-`if` ブロックが必ずしも `return` 文を実行しないのであれば、 `else` ブロックの中に `return` 文を書いても構いません。
+`if` ブロックに `return` 文が存在する場合、可能な限り `else` ブロックに `return` 文は書かずに外側のブロックで `return` してください。
 
 ```js
 // bad
@@ -59,26 +57,6 @@ function foo() {
   }
 }
 
-// bad
-function cats() {
-  if (x) {
-    return x;
-  } else if (y) {
-    return y;
-  }
-}
-
-// bad
-function dogs() {
-  if (x) {
-    return x;
-  } else {
-    if (y) {
-      return y;
-    }
-  }
-}
-
 // good
 function foo() {
   if (x) {
@@ -86,6 +64,19 @@ function foo() {
   }
 
   return y;
+}
+```
+
+`if` ブロックと `else if` ブロックでそれぞれ `return` 文が含まれる場合、 `else if` ブロックを別の `if` ブロックに分けてください。
+
+```js
+// bad
+function cats() {
+  if (x) {
+    return x;
+  } else if (y) {
+    return y;
+  }
 }
 
 // good
@@ -96,17 +87,6 @@ function cats() {
 
   if (y) {
     return y;
-  }
-}
-
-// good
-function dogs(x) {
-  if (x) {
-    if (z) {
-      return y;
-    }
-  } else {
-    return z;
   }
 }
 ```

@@ -10,4 +10,3 @@
 - [アロー関数](./arrow.md)
 - [クラスとコンストラクター](./class.md)
 - [プロパティ](./property.md)
-- [変数](./variables.md)
