@@ -12,7 +12,7 @@
 
 ## 開発環境
 
-ガイドはBabelを使っていることを前提としており、babel-preset-airbnbかそれと同等のものを使うことが必須です。また、airbnb-browser-shimsまたはそれと同等のシム/ポリフィルをアプリにインストールする必要があります。
+本ドキュメントが参考にした Airbnb JavaScript スタイルガイドは Babel を使っていることを前提としており、 `babel-preset-airbnb` か、同等の `ES2018` を使用する必要があります。また、 `airbnb-browser-shims` か、同等の Shim/Polyfill をインストールする必要があります。
 
 ## 目次
 
