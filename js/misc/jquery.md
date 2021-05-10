@@ -1,6 +1,6 @@
 ## jQuery
 
-jQueryオブジェクトの変数は、先頭に `$` を付与して下さい。
+jQuery オブジェクトの変数は、先頭に `$` を付与して下さい。
 
 ```js
 // bad
@@ -13,7 +13,7 @@ const $sidebar = $('.sidebar');
 const $sidebarBtn = $('.sidebar-btn');
 ```
 
-jQueryの検索結果をキャッシュして下さい。
+jQuery の検索結果をキャッシュして下さい。
 
 ```js
 // bad
@@ -40,9 +40,9 @@ function setSidebar() {
 }
 ```
 
-DOMの検索には、 `$('.sidebar ul')`や`$('.sidebar > ul')` のように CSS セレクタを使用して下さい。
+DOM の検索には、 `$('.sidebar ul')`や`$('.sidebar > ul')` のように CSS セレクタを使用して下さい。
 
-jQueryオブジェクトの検索には、スコープ付きの `find()` を使用して下さい。
+jQuery オブジェクトの検索には、スコープ付きの `find()` を使用して下さい。
 
 ```js
 // bad

@@ -3,14 +3,14 @@
 `var` 宣言は、それらに最も近い包含関数スコープの一番上に引き上げられますが、代入された値は引き継がれません。
 
 ```js
-// notDefinedがグローバル変数に存在しない場合、うまく動作しません。
+// notDefined がグローバル変数に存在しない場合、うまく動作しません。
 function example() {
   console.log(notDefined); // => throws a ReferenceError
 }
 
 // 特定の変数を参照するコードの後でその変数を宣言した場合、
 // 変数が巻き上げられた上で動作します。
-// 注意：`true` という値自体は巻き上げられません。
+// 注意 :`true` という値自体は巻き上げられません。
 function example() {
   console.log(declaredButNotAssigned); // => undefined
   var declaredButNotAssigned = true;

@@ -31,7 +31,7 @@ const errorMessage = 'This is a super long error that was thrown because ' +
 const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 ```
 
-文字列の一部に変数の値や式の評価結果などを組み込みたい場合、文字列全体をバッククウォート (``` `` ```) で囲み、式を `${}` で囲ってください。
+文字列の一部に変数の値や式の評価結果などを組み込みたい場合、文字列全体をバッククォート (``` `` ```) で囲み、式を `${}` で囲ってください。
 `${}` で式を囲う際には、不要なスペースは入れないでください。
 
 ```js

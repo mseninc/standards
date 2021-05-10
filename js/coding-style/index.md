@@ -1,4 +1,4 @@
-#  コーディング規約
+#  JavaScript コーディング規約
 
 ## 目次
 - [変数の宣言](./declaration.md)

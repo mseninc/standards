@@ -83,7 +83,7 @@ const result = Array.from(iterable, x => f(x));
 // good
 [1, 2, 3].map(x => x + 1);
 
-// bad - 値を返さないために acc は最初の繰り返しのあとでundefinedになります。
+// bad - 値を返さないために acc は最初の繰り返しのあとで undefined になります。
 [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
   const flatten = acc.concat(item);
   acc[index] = flatten;
@@ -109,9 +109,6 @@ inbox.filter((msg) => {
 // good
 inbox.filter((msg) => {
   const { subject, author } = msg;
-  if (subject === 'Mockingbird') {
-    return author === 'Harper Lee';
-  }
 
   return false;
 });
