@@ -30,8 +30,7 @@
 SELECT
   COUNT(*) AS sushi_post_count
 FROM microposts
-WHERE
-  content LIKE '%:sushi:%'
+WHERE content LIKE '%:sushi:%'
   AND posted_at > '2020-01-01'
 ;
 
@@ -39,8 +38,7 @@ WHERE
 select
     count(*) as sushi_post_count
 from microposts
-where
-    content like '%:sushi:%'
+where content like '%:sushi:%'
     AND posted_at>'2020-01-01'
 ;
 ```
@@ -56,8 +54,7 @@ SELECT
 , hashed_password
 , created_at
 FROM users
-WHERE
-  user_id IN (
+WHERE user_id IN (
     100
   , 2000
   , 300
@@ -71,8 +68,7 @@ SELECT
   hashed_password,
   created_at
 FROM users
-WHERE
-  user_id IN (
+WHERE user_id IN (
     100,
     2000,
     4000
@@ -83,12 +79,11 @@ WHERE
 
 #### SQL の特定の予約語の後は改行する
 
-SQL の構文構造を決める予約語の後は改行します。ただし、保守性を向上させるため FROM, UPDATE, INSERT INTO は除きます。
+SQL の構文構造を決める予約語の後は改行します。ただし、保守性および可読性を向上させるため FROM, WHERE, UPDATE, INSERT INTO は除きます。
 
 ```sql
 SELECT
 SET
-WHERE
 GROUP BY
 ORDER BY
 ```
@@ -101,8 +96,7 @@ SELECT
   DATE(created_at) AS created_date
 , COUNT(*) AS post_count
 FROM posts
-WHERE
-  created_at BETWEEN '2015-12-01' AND '2015-12-10'
+WHERE created_at BETWEEN '2015-12-01' AND '2015-12-10'
 GROUP BY
   created_date
 ;
@@ -110,8 +104,7 @@ GROUP BY
 UPDATE posts
 SET
   content = 'hoge'
-WHERE
-  id = 1
+WHERE id = 1
 ;
 
 INSERT INTO posts
@@ -177,8 +170,7 @@ SELECT
 , user_id
 , COUNT(*) AS post_count
 FROM posts
-WHERE
-  created_at BETWEEN '2015-12-01' AND '2015-12-10'
+WHERE created_at BETWEEN '2015-12-01' AND '2015-12-10'
   AND post_type = 'article'
 GROUP BY
   created_date
@@ -192,8 +184,7 @@ ORDER BY
 SELECT
   DATE(created_at) AS created_date, user_id, COUNT(*) AS post_count
 FROM posts
-WHERE
-  created_at BETWEEN '2015-12-01' AND '2015-12-10' AND post_type = 'article'
+WHERE created_at BETWEEN '2015-12-01' AND '2015-12-10' AND post_type = 'article'
 GROUP BY
   created_date, user_id
 ORDER BY
@@ -210,8 +201,7 @@ AND / OR は行の先頭におき、ブロックよりインデントを一段�
 SELECT
   COUNT(*) AS user_count
 FROM user
-WHERE
-  created_at >= '2015-12-01'
+WHERE created_at >= '2015-12-01'
   AND status IN ('signup', 'available')
   AND admin IS NULL
 ;
@@ -220,8 +210,7 @@ WHERE
 SELECT
   COUNT(*) AS user_count
 FROM user
-WHERE
-  created_at >= '2015-12-01' AND
+WHERE created_at >= '2015-12-01' AND
   status IN ('signup', 'available') AND
   admin IS NULL
 ;
@@ -297,8 +286,7 @@ FROM microposts AS m
     AND u.created_at > '2020-01-01'
   LEFT JOIN countries AS c
     ON c.id = u.country_id
-WHERE
-  u.status IN ('signup', 'available')
+WHERE u.status IN ('signup', 'available')
 ;
 
 -- NG
@@ -310,8 +298,7 @@ ON m.user_id = u.id
 AND u.created_at > '2020-01-01'
 LEFT JOIN countries AS c
 ON c.id = u.country_id
-WHERE
-  u.status IN ('signup', 'available')
+WHERE u.status IN ('signup', 'available')
 ;
 ```
 
@@ -325,8 +312,7 @@ WHERE
 SELECT
   COUNT(*) AS sushi_beer_post_count
 FROM microposts
-WHERE
-  DATE(created_at) = DATE(UTC_TIMESTAMP())
+WHERE DATE(created_at) = DATE(UTC_TIMESTAMP())
   AND content REGEXP(':(sushi|beer):')
 ;
 
@@ -334,8 +320,7 @@ WHERE
 SELECT
   COUNT(*) AS sushi_beer_post_count
 FROM microposts
-WHERE
-  DATE(created_at) = DATE(UTC_TIMESTAMP())
+WHERE DATE(created_at) = DATE(UTC_TIMESTAMP())
   AND content REGEXP(':(sushi|beer):');
 ```
 
@@ -415,15 +400,28 @@ EXISTS 句も同様に括弧内をインデントします。カッコは EXISTS
 SELECT
   u.name
 FROM users AS u
-WHERE
-  EXISTS
+WHERE 1 = 1
+  AND EXISTS
   (
     SELECT
       1
     FROM
    microposts
-    WHERE
-      user_id = u.id
+    WHERE user_id = u.id
+  )
+;
+
+-- Good
+SELECT
+  u.name
+FROM users AS u
+WHERE EXISTS
+  (
+    SELECT
+      1
+    FROM
+   microposts
+    WHERE user_id = u.id
   )
 ;
 ```
