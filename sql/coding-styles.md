@@ -107,13 +107,11 @@ SET
 WHERE id = 1
 ;
 
-INSERT INTO posts
-(
+INSERT INTO posts (
   id
 , content
 , created_at
-) VALUES
-(
+) VALUES (
   5
 , 'Hello, world'
 , '2020-01-01T00:00:00Z'
