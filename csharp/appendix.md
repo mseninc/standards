@@ -6,7 +6,7 @@
 Verbatim String Literal と呼ばれます。
 
 ```cs
-//var path = "C:\\Users\\UserName\\Documents";
+// string path = "C:\\Users\\UserName\\Documents";
 string path = @"C:\Users\UserName\Documents";
 
 string sql = @"
@@ -31,7 +31,7 @@ AND o.order_id = @order_id'
 alignment は `-` (マイナス) で左寄せとなります。
 `{index[,alignment][:format]}`
 
-C#6 以降は**文字列文字列補間 (Interpolated Strings) の書式**が推奨されます。
+C#6 以降は**文字列補間 (Interpolated Strings) の書式**が推奨されます。
 
 ```cs
 // var coord = String.Format("({0}, {1})", x, y);
