@@ -25,4 +25,5 @@ MSDN のガイドラインはライブラリの Public な範囲を対象とし�
 - [命名規則](./naming-rules.md)
 - [コーディングスタイル](./coding-styles.md)
 - [イディオム](./idioms.md)
+- [XML コメント](./xml-comments.md)
 - [付録](./appendix.md)
