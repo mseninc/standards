@@ -12,22 +12,22 @@
 
 ### コメント規則
 
-* コード行の末尾ではなく別の行に記述します。
+* 原則としてコード行の末尾ではなく別の行に記述します。
 * 文章となるように記述します。(先頭大文字、ピリオドで終わる)
 * コメント記号 (`//`) と文字の間には空白をひとつ挿入します。
 
 ```cs
-var a = 0; // ダメなコメントのパターンです。
+int a = 0; // 👎
 
-// コメントは別の行に記述します。
-var a = 0;
+// 👍
+int a = 0;
 ```
 
 例外としてメソッドチェーンの各行にコメントを記述する場合のみ行の末尾も許容します。
 ただしコメントが長くなる場合は前行に挿入してください。
 
 ```cs
-var a = this.CreateList()
+int[] a = this.CreateList()
     .Where(x => x.Length > 3) // 長さが 3 桁以上なら
     .Select(x => x.Length * 3) // 各長さを 3 倍した数値にして
     .ToArray(); // 配列に変換する
@@ -49,11 +49,12 @@ var currentPerformanceCounterCategory = new System.
 メソッドチェーンを記述する場合はピリオドを前置とします。
 
 ```cs
-var ipAddr = String.Format(
+string ipAddr = string.Format(
     "{0}.{1}.{2}.{3}",
-    0x7F, 0x00, 0x00, 0x01);
+    0x7F, 0x00, 0x00, 0x01
+    );
 
-var connStr = new StringBuilder()
+string connStr = new StringBuilder()
     .AppendFormat("Server={0};", "localhost")
     .AppendFormat("Database={0};", "master")
     .AppendFormat("User Id={0};", "sa")
@@ -84,10 +85,10 @@ if ((data == null) ||
 
 ```cs
 // 項が短い場合
-var n = isVisible ? 1 : 0;
+int n = isVisible ? 1 : 0;
 
 // 項が長い場合
-var n = list.Any(x => x.Number > 0)
+int n = list.Any(x => x.Number > 0)
     ? list.Select(x => x.Number).Sum()
     : 0;
 ```
@@ -108,8 +109,10 @@ var n = list.Any(x => x.Number > 0)
 自動プロパティは 1 行で記述します。
 
 ```cs
-// prop -> tab -> tabで補完できます。
+// getter, setter のある通常のプロパティは prop -> tab -> tab で補完できます。
 public int MyProperty { get; set; } = 0;
+// getter のみのプロパティ
+public int GetterOnlyProp => 0;
 ```
 
 ### 空のコンストラクタ

@@ -1,14 +1,15 @@
 ## 付録
 
 ### 逐語的リテラル文字列
+
 @を付けるとエスケープを省略でき、ヒアドキュメントとして扱えます。
 Verbatim String Literal と呼ばれます。
 
 ```cs
-//var path = "C:\\Users\\UserName\\Documents";
-var path = @"C:\Users\UserName\Documents";
+// string path = "C:\\Users\\UserName\\Documents";
+string path = @"C:\Users\UserName\Documents";
 
-var sql = @"
+string sql = @"
 SELECT
 u.user_name
 , o.order_date
@@ -30,12 +31,14 @@ AND o.order_id = @order_id'
 alignment は `-` (マイナス) で左寄せとなります。
 `{index[,alignment][:format]}`
 
-C#6 以降は文字列挿入 (Interpolated Strings) の書式が推奨されます。
+C#6 以降は**文字列補間 (Interpolated Strings) の書式**が推奨されます。
 
 ```cs
 // var coord = String.Format("({0}, {1})", x, y);
-var coord = $"({x}, {y})";
+string coord = $"({x}, {y})";
 ```
+
+- [$ - 文字列補間 - C# リファレンス | Microsoft Learn](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/tokens/interpolated)
 
 #### 数値の場合(標準)
 
@@ -57,11 +60,11 @@ float f = 0.1F;
 int yen = 1000;
 byte b = 0xFF;
 // f=10.00%
-var percent = $"f={f:P2}";
+string percent = $"f={f:P2}";
 // yen=    \1,000
-var currency = $"yen={yen,10:C}";
+string currency = $"yen={yen,10:C}";
 // b=0x00FF
-var hex = $"b=0x{b,-5:X4}";
+string hex = $"b=0x{b,-5:X4}";
 ```
 
 <div class="break" />
@@ -76,9 +79,9 @@ var hex = $"b=0x{b,-5:X4}";
 - `;`: セクション区切り記号(正,負,ゼロ)
 
 ```cs
-var percent = $"{f:0.00%}";
-var phone = $"{tel:(###)###-####}";
-var section = $"{n:#;(#);Zero}";
+string percent = $"{f:0.00%}";
+string phone = $"{tel:(###)###-####}";
+string section = $"{n:#;(#);Zero}";
 ```
 
 #### 日付の場合
@@ -108,11 +111,11 @@ var section = $"{n:#;(#);Zero}";
 ※TimeSpan 型の場合は、区切り記号が使えないのでエスケープする必要があります。
 
 ```cs
-//var date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff");
-//var date = String.Format("{0:yyyy/MM/dd HH:mm:ss.fff}", DateTime.Now);
-var date = $"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}";
+// string date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff");
+// string date = String.Format("{0:yyyy/MM/dd HH:mm:ss.fff}", DateTime.Now);
+string date = $"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}";
 
-//var date = TimeSpan.MaxValue.ToString(@"yyyy\/MM\/dd HH\:mm\:ss\.fff")
+// string date = TimeSpan.MaxValue.ToString(@"yyyy\/MM\/dd HH\:mm\:ss\.fff")
 var date = $@"{TimeSpan.MaxValue:yyyy\/MM\/dd HH\:mm\:ss\.fff}";
 ```
 
