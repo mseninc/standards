@@ -111,11 +111,13 @@ INSERT INTO posts (
   id
 , content
 , created_at
-) VALUES (
-  5
-, 'Hello, world'
-, '2020-01-01T00:00:00Z'
 )
+VALUES
+  (
+    5
+  , 'Hello, world'
+  , '2020-01-01T00:00:00Z'
+  )
 ;
 
 -- NG
@@ -140,11 +142,13 @@ posts (
   id
 , content
 , created_at
-) VALUES (
-  5
-, 'Hello, world'
-, '2020-01-01T00:00:00Z'
 )
+VALUES
+  (
+    5
+  , 'Hello, world'
+  , '2020-01-01T00:00:00Z'
+  )
 ;
 ```
 
