@@ -384,3 +384,53 @@ Pascal 形式とし、名詞形を用います。
 
 複雑な構造が必要な場合は抽象クラスの使用を検討します。
 基本は単数形ですが、`Flags` (ビットフィールド) を表す場合は複数形とします。
+
+### 単語の選択
+
+#### boolean
+
+論理値を返すメソッドや論理値を格納する変数、プロパティには `is`-, `can`-, `has`- を使います。
+
+特別な場合を除き `is`+<形容詞> 、`can`+<動詞> とします。 エラーがあることを示すプロパティのみ `has`+<名詞> を許可します (`HasError` など)。
+
+```diff
+- IsEnable
++ IsEnabled
+
+- FeatureIsAvailable
++ IsFeatureAvailable
+
+- CanExecuted
++ CanExecute
+
+- HasGoodMeaning
++ HasError
++ HasSomeErrors
+```
+
+#### ファイル名
+
+「ファイル名」を表すフィールド・プロパティーなどを定義する場合やファイル名を扱うメソッドを定義する場合は下記の基本指針に従ってください。
+
+「ファイル名」の英語表現は `Filename` が一般的ですが、 `FileName` という表現もありえます。また、プログラム上の「ファイル名」には 2 つの意味合いがあるため、これらを区別することは重要です。
+
+1. フォルダーパスを含む「ファイルのフルパス」（例. `C:\tmp\hoge\Test.jpg`）
+2. フォルダーパスを含まない「ファイルの名前」（例. `Test.jpg`）
+
+よって、 1 を「ファイルパス」、2 を「ファイル名」と呼ぶことにし、それぞれ `FilePath` と `FileName` に対応させます。
+
+1. ファイルパス: `~FilePath`<br>(`Filename` は非推奨だが使用可。引数で意味がわかりやすい場合は `path` を許容)
+2. ファイル名: `~FileName`
+
+曖昧になる `Filename` の使用は極力避け、使用する場合は 1 の意味で使用してください。
+
+
+```diff
+- GetFilename(string path)
++ GetFileName(string path)
+
+- /// <summary>出力先のファイルパス</summary>
+- public TargetFilename { get; set; }
++ /// <summary>出力先のファイルパス</summary>
++ public TargetFilePath { get; set; }
+```
