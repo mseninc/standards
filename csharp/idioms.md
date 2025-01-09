@@ -72,13 +72,13 @@ public static class Constants
 これは配列がゼロベースのインデックスで用いられるためです。
 
 ```cs
-for (var i = 0; i < length; i++)
+for (int i = 0; i < length; i++)
 ```
 
 ### 比較演算子の向き
 
 比較演算子は、左を主とするのが一般的です。
-範囲を扱う場合は、比較演算子の左を小、右を大として、`<, <=`のみ使用する方がわかりやすくなります。
+範囲を扱う場合は、比較演算子の左を小、右を大として、`<, <=` のみ使用する方がわかりやすくなります。
 
 ```cs
 // 比較演算子の左を主とした場合
@@ -103,8 +103,8 @@ LINQ のフル機能にアクセスするためにはメソッド構文を使用
 
 ```cs
 // 通常のループ
-var evenMax = 0;
-foreach (var d in decimals)
+int evenMax = 0;
+foreach (int d in decimals)
 {
     if (d % 2 == 0)
     {
@@ -116,14 +116,14 @@ foreach (var d in decimals)
 }
 
 // LINQ (メソッド構文 + ラムダ式)
-var oddMin = decimals
+int oddMin = decimals
     .Where(x => (x % 2) == 1)
     .Min();
 ```
 
 ### キャストは as および is を使う
 
-C# 7.0 以降は `is` 式のパターンマッチングを使用できます。
+C# 7.0 以降は `is` 式のパターンマッチングを使用します。
 
 ```cs
 // 推奨する記法 (C# 7.0)
@@ -131,7 +131,7 @@ if (obj?.Value is int i)
 {
 }
 
-// Null 条件演算子 (C# 6.0)
+// 非推奨: Null 条件演算子 (C# 6.0)
 if (obj?.Value is int)
 {
     int i = (int)obj.Value;
@@ -152,81 +152,74 @@ if (instance != null)
 }
 ```
 
-### 変わった書き方は避ける
-
-広く使われている書き方の方が読みやすいです。
-コードは書きやすさより読みやすさを重視します。
-
-```cs
-// 特異な記述
-// while ((len--) > 0)と等価
-var len = 100;
-while (len --> 0)
-{
-    // 99 .. 0 のループ
-}
-
-// 一般的な記述
-for (var i = 99; i >= 0; i--)
-{
-    // 99 .. 0 のループ
-}
-```
 
 ### this. および ClassName. の推奨
-`this.`は現在のインスタンスを参照します。
-フィールドやメソッドを呼び出す場合、`this.`をつけることによって明示できます。
-メソッド内で `this.` がついていたらローカル変数ではなくフィールドだと判別できます。
 
-`base.`は `override` などで隠匿されたメンバへ明示的にアクセスする場合にのみ使います。
+`this.` は現在のインスタンスを参照します。
+自クラスに対する拡張メソッドを呼び出す場合など特殊な場合を除いて `this.` の記述は不要です。
 
-`static`なメンバにアクセスする場合には `ClassName.` (クラス名)を付けます。
-冗長な場合は省略されることもありますが、`static class`でない場合は明示した方がよいでしょう。
+`base.` は `override` などで隠匿されたメンバへ明示的にアクセスする場合にのみ使います。
 
-ReSharper では省略が推奨されていますが、明示した方が間違いを減らせます。
+`static` なメンバにアクセスする場合には `ClassName.` (クラス名)を付けます。
+冗長な場合は省略されることもありますが、`static class` でない場合は明示した方がよいでしょう。
 
 <div class="break" />
 
-### var の使いどころ
-厳密な型が重要でない場合には `var` を積極的に使います。
-変数名から `var` の型が推測できない場合は名前を修正してください。
+### var は原則として使用しない
 
-`var n = 10m;`は `Decimal n = 10m;` と明示した方が間違いを減らせます。
+変数の宣言時は `var` を使わず、具体的な型名を指定します。
 
-ReSharper では `var` の使用を推奨されていますが、適用箇所は考えた方がよいでしょう。
+```cs
+decimal n = 10m; // Good 👍
+var n = 10m; // NG 👎
+```
+
+```cs
+IEnumerable<int> sequence = Enumerable.Range(0, 10); // Good 👍
+var sequence = Enumerable.Range(0, 10); // NG 👎
+```
 
 ### const と readonly の使い分け
-`const`はコンパイル時定数ですが、`readonly`は実行時定数(変数)です。
-`const`を使用するとデバッグ時のエディットコンティニュで変更できません。
+
+`const` はコンパイル時定数ですが、 `readonly` は実行時定数(変数)です。
+`const` を使用するとデバッグ時のエディットコンティニュで変更できません。
 アセンブリ内への定数の埋込が発生するので再コンパイルが必要になります。
 
-属性(`attribute`)や列挙型(`enum`)の定義など、コンパイル時に定数が必要な箇所のみ `const` を使用します。
-
-ReSharper では `const` の使用が推奨されていますが、代わりに `readonly` を使ってください。
+属性 (`attribute`) や列挙型 (`enum`) の定義など、コンパイル時に定数が必要な箇所のみ `const` を使用します。
 
 ### 解放が必要なオブジェクトには using を使う
-`IDisposable`インターフェースを実装し、`Dispose()`メソッドが実装されているオブジェクトには using ステートメントを使います。
-ファイル、画像、メモリ、ネットワーク、リソースを扱うオブジェクトは解放が必要となります。
+
+`IDisposable` インターフェースを実装するか、`Dispose()` メソッドが実装されているオブジェクトは原則として **`Dispose()` メソッドを呼び出す必要**があります。通常、ファイル、画像、メモリ、ネットワーク、リソースを扱うオブジェクトは解放が必要となります。
+
+この場合、特に理由がある場合を除き、 `using` 宣言またはステートメントを使います。
 
 ```cs
 try
 {
     string path = "test.txt";
-    using (var stream = new FileStream(path, FileMode.Read))
-    using (var reader = new StreamReader(stream))
+    using FileStream stream = new(path, FileMode.Read); // 👈 using 宣言
+    using (StreamReader reader = new(stream)) // 👈 using ステートメント
     {
         // 処理
     }
 }
 ```
 
+特にスコープを明示する必要がなければ `using` 宣言を使用します。ブロックのネストを最小限に抑えることができます。
+
+- [using ステートメント - C# リファレンス | Microsoft Learn](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/using-statement)
+
+例外として `DataTable` の `Dispose()` は内部的になにも行われないため、呼び出す必要はありません。
+
 ### Dispose() 後は null を設定する
+
 オブジェクトは `Dispose()` 後すぐにメモリから開放されるわけではありません。
-`null`を設定することにより危険な参照を避けることができます。
+`null` を設定することにより危険な参照を避けることができます。
 実行環境によっては `null` を設定しないとガベージコレクタで解放されない場合があります。
 
 ### catch 時の throw の使い分け
-`throw ex;`でリスローとするとスタックトレースが上書きされます。
+
+`throw ex;` でリスローとするとスタックトレースが上書きされます。
 その場で処理するべきか、呼び出し元へ伝えるべきかで使い分けます。
 
 ```cs
@@ -247,9 +240,10 @@ catch (Exception2 ex)
 <div class="break" />
 
 ### 引数でコレクションを受けるときはできるだけ抽象度の高いものを使う
+
 メソッドの引数に `IEnumerable<T>` を指定することによって、引数の内容が変化しないことを明示できます。
-`IEnumerable<T>`は"列挙可能"なことを示しますが、`IList<T>`は"追加・削除"が可能です。
-.NET 4.5 以降は `IReadOnlyList<T>` もありますが、`IEnumerable<T>`の方が最初から順番にアクセスしていく意味が強いです。
+`IEnumerable<T>` は"列挙可能"なことを示しますが、 `IList<T>` は"追加・削除"が可能です。
+.NET 4.5 以降は `IReadOnlyList<T>` もありますが、 `IEnumerable<T>` の方が最初から順番にアクセスしていく意味が強いです。
 
 ```cs
 public void DoAnything(IEnumerable<T> list)
@@ -257,16 +251,16 @@ public void DoAnything(IEnumerable<T> list)
 
 ### Array, ArrayList, List<T> の使い分け
 
-* `System.Array` 
-すべての配列の基本クラスです。`[]`で宣言します。 
-固定長なのでパフォーマンスを考慮する場合や、画像やデータを保持する場合などに使います。 
+* `System.Array`  
+すべての配列の基本クラスです。 `[]` で宣言します。
+固定長なのでパフォーマンスを考慮する場合や、画像やデータを保持する場合などに使います。
 
-* `System.Collections.ArrayList` 
-サイズが動的に変動する配列です。 
-型指定できないので `ArrayList` より `List<T>` を使います。
+* `System.Collections.ArrayList`  
+サイズが動的に変動する配列です。型指定ができない古い型のため、原則として**使用しません**。
+ `ArrayList` より `List<T>` を使います。
 
-* `System.Collections.Generics.List<T>` 
-型指定された `ArrayList` です。
+* `System.Collections.Generics.List<T>`  
+積極的に利用して問題ありません。
 
 ```cs
 // Array
@@ -285,12 +279,12 @@ string[] array = words.ToArray();
 
 ### Hashtable, Dictionary<TKey, TValue> の使い分け
 
-* `System.Collections.Hashtable` 
+* `System.Collections.Hashtable`  
 キー/値のペアの配列です。連想配列やハッシュ(ハッシュテーブル)などとも言います。 
-型指定できない `Hashtable` より `Dictionary<TKey, TValue>` を使います。
+型指定ができない古い型のため、原則として**使用しません**。
 
-* `System.Collections.Generic.Dictionary<TKey, TValue>` 
-型指定された `Hashtable` です。
+* `System.Collections.Generic.Dictionary<TKey, TValue>`  
+積極的に利用して問題ありません。
 
 ```cs
 // Dictionary<TKey, TValue>
@@ -304,8 +298,9 @@ if (dic.ContainsKey(key))
 ```
 
 ### 一定時間スリープさせる方法
+
 スリープさせるにはいくつかの方法があります。
-`Wait()`は `await` と組み合わせるとデッドロックが発生するので注意が必要です。
+`Wait()` は `await` と組み合わせるとデッドロックが発生するので注意が必要です。
 
 ```cs
 int ms = 1000;
@@ -326,7 +321,7 @@ await Task.Delay(ms);
 ### アクセス修飾子について
 
 アクセス修飾子は省略できますが、明示した方が間違いを減らせます。
-`protected`と `internal` は依存関係を複雑にするため、あえて使用しない場合もあります。
+`protected` と `internal` は依存関係を複雑にするため、あえて使用しない場合もあります。
 
 アクセシビリティレベルの制限は下記の通りです。
 - `public`: 制限なし
@@ -357,46 +352,43 @@ ReSharper で推奨されています。
 型を宣言する場合はプリミティブ型 (`object, int, string` など) を使います。
 静的メンバーを参照する場合は CLS 型 (`Object, Int32, String`など) を使います。
 
-MSDN ではエイリアスを活用するよう推奨されますが、クラスの意味を考えると CLS 型を使ったほうがスマートです。
+MSDN ではエイリアスを活用するよう推奨されていますので、それに従います。
 
 ```cs
-if (String.IsNullOrEmpty(str))
+if (string.IsNullOrEmpty(str))
 
-if (Decimal.TryParse(txt, out decimal n))
+if (decimal.TryParse(txt, out decimal n))
 ```
 
 ### unsigned 型はなるべく使わない
 
 `uint`すなわち `System.UInt32` は CLS に準拠していません。
-`uint`ではなく、`int`を使用します。
-`int`を使用すると他のライブラリと対話しやすくなります。
+`uint` ではなく、`int` を使用します。
+`int` を使用すると他のライブラリと対話しやすくなります。
 
-### interface と abstract class の使い分け
-`interface`にメンバを追加すると、既存のコードを破壊します。
-将来にわたって変更がない場合や、多重継承が必要な場合にのみ `interface` を使用します。
-`interface`に共通のメソッドが必要な場合は拡張メソッドの使用を検討します。
-それ以外は `abstract class` を使用しましょう。
 
 ### 拡張メソッドについて
+
 拡張メソッドは `enum, interface` などメソッドが追加できないものに使います。
 それ以外はインスタンスメソッドや静的メソッドで解決できないか検討します。
 
 ```cs
 public static class FooExtensions
 {
-public static void Method(this IFoo foo) { }
+    public static void Method(this IFoo foo) { }
 }
 ```
 
-`System.Linq`には `IEnumerable` に対しての拡張メソッドが用意されています。
 
 ### コードの依存関係
+
 コードを共有化(ライブラリ化)することで、再利用性を高めることは重要です。
 しかし、共有化するということは、ライブラリへの依存度を高めます。
 ライブラリの変更が広範囲にわたる場合は、保守のコストが増大します。
 共有化する場合は、ライブラリが肥大化しないよう、最小限の機能となるよう検討します。
 
 ### ユーティリティクラスの是非
+
 重複を避けるため共通の処理をユーティリティクラスとし、コードを再利用するのは便利です。
 しかしオブジェクト指向的ではなく、手続き型的であり、クラスの再利用性に問題があります。
 多くのクラスがユーティリティクラスを呼び出し、依存してしまうことが予想されます。
@@ -420,6 +412,9 @@ public static void Method(this IFoo foo) { }
 TODO(実装予定), UNDONE(実装中), HACK(改良予定)などトークンも併せて使うとよりわかりやすくなります。
 
 ### コメント タグ
+
+この項は古い情報です。
+**XML コメントに関する最新の情報は [XML コメント](./xml-comments.md) を参照**してください。
 
 C# ドキュメンテーション コメント形式で記述すればインテリセンス (IntelliSense) へ反映されます。
 Sandcastle などのツールを利用すれば API ドキュメントを作成することも可能です。
