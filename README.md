@@ -4,6 +4,7 @@
 
 ## 目次
 
+- [セキュアコーディング](./secure-coding/index.md)
 - [Git](./git/index.md)
 - [C#](./csharp/index.md)
 - [PHP](./php/index.md)
